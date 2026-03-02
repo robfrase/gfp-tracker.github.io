@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gavin Frase Performance - Play to Your Potential</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%); }
+        .gold-text { background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 100; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 32px; color: white; cursor: pointer; }
+        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 48px; color: white; cursor: pointer; padding: 20px; }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Mobile menu button (left) -->
+            <button onclick="toggleMenu()" class="md:hidden p-2 text-white">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-2">
+                <img src="images/GFP-Logo-20260225_nobg.png" alt="GFP" class="h-8 w-auto">
+            </a>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex items-center gap-6 text-sm">
+                <a href="#video" class="text-gray-400 hover:text-amber-400 transition">Video</a>
+                <a href="#player" class="text-gray-400 hover:text-amber-400 transition">Why GFP</a>
+                <a href="#tech" class="text-gray-400 hover:text-amber-400 transition">Tracker</a>
+                <a href="#science" class="text-gray-400 hover:text-amber-400 transition">Science</a>
+                <a href="#coach" class="text-gray-400 hover:text-amber-400 transition">Coaches</a>
+                <a href="#pricing" class="text-gray-400 hover:text-amber-400 transition">Pricing</a>
+            </div>
+
+            <!-- CTA -->
+            <button onclick="openBetaModal()" class="px-4 py-2 bg-amber-400 text-black text-sm font-semibold rounded-full hover:bg-amber-300 transition">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg hidden">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-8">
+                <a href="#hero" onclick="toggleMenu()">
+                    <img src="images/GFP-Logo-20260225_nobg.png" alt="GFP" class="h-8">
+                </a>
+                <button onclick="toggleMenu()" class="p-2 text-white">
+                    <i data-lucide="x" class="w-8 h-8"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="#hero" onclick="toggleMenu()" class="block py-3 text-xl font-semibold border-b border-gray-800">Home</a>
+                <a href="#video" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Video</a>
+                <a href="#player" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Why GFP</a>
+                <a href="#tech" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Tracker</a>
+                <a href="#science" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Science</a>
+                <a href="#coach" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Coaches</a>
+                <a href="#pricing" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Pricing</a>
+                <a href="#gallery" onclick="toggleMenu()" class="block py-3 text-xl text-gray-400 hover:text-amber-400 border-b border-gray-800">Gallery</a>
+                <a href="#appendix" onclick="toggleMenu()" class="block py-3 text-xl text-gray-500 hover:text-amber-400 border-b border-gray-800 text-sm">Appendix</a>
+                <button onclick="openBetaModal();toggleMenu();" class="block py-4 text-xl font-semibold text-center bg-amber-400 text-black rounded-lg mt-8">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        function openBetaModal() {
+            document.getElementById('beta-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeBetaModal() {
+            document.getElementById('beta-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Hero -->
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+        <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23D4AF37\" fill-opacity=\"0.1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <!-- Logo -->
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Play to Your <span class="gold-text">Potential</span></h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">The only golf app that tracks <span class="text-amber-400 font-semibold">HOW</span> you hit the ball—not just WHERE it ends up.</p>
+            <p class="text-lg text-gray-500 mb-8">Voice-first. No sensor tags. No hardware. Just talk to your Apple Watch.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openBetaModal()" class="inline-flex items-center gap-2 px-8 py-4 gold-gradient text-black font-semibold rounded-full hover:opacity-90 transition">
+                    Get Started <i data-lucide="arrow-right"></i>
+                </button>
+                <a href="#video" class="inline-flex items-center gap-2 px-8 py-4 border border-amber-400 text-amber-400 font-semibold rounded-full hover:bg-amber-400/10 transition">
+                    <i data-lucide="play"></i> Video Intro
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Introduction -->
+    <section id="video" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-4">Golf Performance Tracker <span class="gold-text">App Introduction</span></h2>
+            <p class="text-gray-400 mb-8">See how GFP tracks what actually matters — your process, not just your score</p>
+            <div class="mx-auto rounded-xl shadow-2xl overflow-hidden" style="max-width: 800px;">
+                <iframe
+                    width="800"
+                    height="450"
+                    src="https://www.youtube.com/embed/2AI7HNOcgLA"
+                    title="Golf Performance Tracker App Introduction"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Features -->
+    <section id="tech" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">The <span class="gold-text">Tracker</span></h2>
+            <p class="text-gray-400 text-center mb-16">8-Dimension Strike Quality + Sensor Fusion</p>
+
+            <!-- Strike Quality Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Toe</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Heel</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Left</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Right</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Short</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Long</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Thin</span></div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center"><span class="text-amber-400 font-bold">Heavy</span></div>
+            </div>
+
+            <!-- Voice Feature -->
+            <div class="bg-gray-800 rounded-2xl p-8 text-center mb-16">
+                <i data-lucide="mic" class="w-16 h-16 text-amber-400 mx-auto mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">"Hey GFP"</h3>
+                <p class="text-gray-400">Voice-first tracking. Just speak naturally - "fat 7-iron", "pushed driver right". No tapping required.</p>
+            </div>
+
+            <!-- GPS Features -->
+            <div class="mt-16 grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 rounded-2xl p-6">
+                    <i data-lucide="map" class="w-10 h-10 text-amber-400 mb-4"></i>
+                    <h4 class="text-xl font-bold mb-2">30,000 Courses</h4>
+                    <p class="text-gray-400 text-sm">Full database with auto-fill for par, rating, slope, and per-hole data.</p>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-6">
+                    <i data-lucide="navigation" class="w-10 h-10 text-amber-400 mb-4"></i>
+                    <h4 class="text-xl font-bold mb-2">GPS Auto-Hole</h4>
+                    <p class="text-gray-400 text-sm">Automatically detects which hole you're on based on proximity.</p>
+                </div>
+            </div>
+
+            <!-- Sensor Fusion Pipeline -->
+            <div class="bg-gray-800 rounded-2xl p-8 mt-16">
+                <h3 class="text-2xl font-bold mb-6 text-center">Sensor Fusion Pipeline</h3>
+                <div class="flex flex-wrap justify-center items-center gap-4 text-sm">
+                    <div class="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded-lg"><i data-lucide="watch" class="w-5 h-5 text-amber-400"></i><span>Apple Watch</span></div>
+                    <i data-lucide="arrow-right" class="text-gray-600"></i>
+                    <div class="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded-lg"><span class="text-amber-400">800Hz</span><span>Accelerometer</span></div>
+                    <i data-lucide="arrow-right" class="text-gray-600"></i>
+                    <div class="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded-lg"><span class="text-amber-400">200Hz</span><span>Gyroscope</span></div>
+                    <i data-lucide="arrow-right" class="text-gray-600"></i>
+                    <div class="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded-lg"><i data-lucide="cpu" class="w-5 h-5 text-amber-400"></i><span>Shot Detection</span></div>
+                    <i data-lucide="arrow-right" class="text-gray-600"></i>
+                    <div class="flex items-center gap-2 bg-gray-700 px-4 py-2 rounded-lg"><i data-lucide="map-pin" class="w-5 h-5 text-amber-400"></i><span>GPS Context</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs -->
+    <section id="programs" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">Coaching <span class="gold-text">Programs</span></h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Player -->
+                <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-2">Player</h3>
+                    <p class="text-gray-400 mb-4">For golfers focused on improvement through process tracking</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Process tracking</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>30-Shot Combine</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Dashboard & analytics</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>One coach connection</li>
+                    </ul>
+                </div>
+                <!-- Competitor -->
+                <div class="bg-gray-800 rounded-2xl p-8 border-2 border-amber-400 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold mb-2">Competitor</h3>
+                    <p class="text-gray-400 mb-4">For serious golfers competing in tournaments</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Everything in Player</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Voice "Hey GFP" commands</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>GPS shot inference</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Round type analysis</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Advanced analytics</li>
+                    </ul>
+                </div>
+                <!-- Elite -->
+                <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-2">Elite</h3>
+                    <p class="text-gray-400 mb-4">For committed golfers seeking peak performance</p>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Everything in Competitor</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>AI pattern recognition</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Periodized planning</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>GPT Coach access</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400"></i>Priority support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">The <span class="gold-text">Roadmap</span></h2>
+            <div class="relative">
+                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+                <div class="space-y-12">
+                    <div class="relative pl-20">
+                        <div class="absolute left-6 w-5 h-5 bg-amber-400 rounded-full"></div>
+                        <h3 class="text-xl font-bold">V1 - Foundation</h3>
+                        <p class="text-gray-400">Process tracking, 5 categories, 30,000 courses</p>
+                    </div>
+                    <div class="relative pl-20">
+                        <div class="absolute left-6 w-5 h-5 bg-amber-400 rounded-full"></div>
+                        <h3 class="text-xl font-bold">V2 - Seamless Collection</h3>
+                        <p class="text-gray-400">Voice commands, GPS inference, 1,000+ golf terms</p>
+                    </div>
+                    <div class="relative pl-20">
+                        <div class="absolute left-6 w-5 h-5 bg-amber-400 rounded-full"></div>
+                        <h3 class="text-xl font-bold">V3 - Intelligent Coaching</h3>
+                        <p class="text-gray-400">AI patterns, periodization, GPT coach</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mental Process -->
+    <section id="mental" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">Mental <span class="gold-text">Process</span></h2>
+            <p class="text-gray-400 text-center mb-12">Track what other apps ignore - the mental game</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="p-4 bg-gray-800 rounded-xl text-center">
+                    <i data-lucide="brain" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                    <p class="font-semibold">Fear</p>
+                    <p class="text-xs text-gray-500">Defensive play</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center">
+                    <i data-lucide="angry" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                    <p class="font-semibold">Anger</p>
+                    <p class="text-xs text-gray-500">Emotional reaction</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center">
+                    <i data-lucide="calculator" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                    <p class="font-semibold">Miscalculation</p>
+                    <p class="text-xs text-gray-500">Wrong club/yards</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center">
+                    <i data-lucide="target" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                    <p class="font-semibold">No Intention</p>
+                    <p class="text-xs text-gray-500">No committed target</p>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-xl text-center">
+                    <i data-lucide="eye-off" class="w-8 h-8 text-amber-400 mx-auto mb-2"></i>
+                    <p class="font-semibold">No Attention</p>
+                    <p class="text-xs text-gray-500">No routine</p>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-green-400 font-semibold">Positive: Followed Routine</p>
+        </div>
+    </section>
+
+    <!-- Why GFP -->
+    <section id="why" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">Why <span class="gold-text">GFP Tracker</span></h2>
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-black font-bold">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Strike Quality Over Ball Position</h3>
+                        <p class="text-gray-400">A fat strike is fat whether the ball ends up on the green or in the bunker. Track what you actually did with the club.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-black font-bold">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Target-Relative Direction</h3>
+                        <p class="text-gray-400">We measure against YOUR intended target, not the pin. Smart misses aren't penalized.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-black font-bold">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Hardware-Free</h3>
+                        <p class="text-gray-400">No $250 sensor tags. No club attachments. Uses iPhone and Apple Watch you already own.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">Investment</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="py-4 px-6">Tier</th>
+                            <th class="py-4 px-6">Monthly</th>
+                            <th class="py-4 px-6">Key Features</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="border-b border-gray-800">
+                            <td class="py-4 px-6 font-semibold">Starter</td>
+                            <td class="py-4 px-6">$0</td>
+                            <td class="py-4 px-6">Dashboard, course database</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-4 px-6 font-semibold">Player</td>
+                            <td class="py-4 px-6">$20</td>
+                            <td class="py-4 px-6">Process tracking, 30-Shot Combine, calendar</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-4 px-6 font-semibold gold-text">Pro</td>
+                            <td class="py-4 px-6 gold-text">$39</td>
+                            <td class="py-4 px-6">+ Voice "Hey GFP", GPS inference</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-4 px-6 font-semibold">Coach</td>
+                            <td class="py-4 px-6">$79</td>
+                            <td class="py-4 px-6">Up to 10 golfers, Coaching Hub</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-semibold">Coach AI</td>
+                            <td class="py-4 px-6">$149</td>
+                            <td class="py-4 px-6">AI lesson plans, automated insights</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infographics -->
+    <section id="science" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">The <span class="gold-text">Science</span></h2>
+            <p class="text-gray-400 text-center mb-12">Evidence-based process tracking</p>
+
+            <!-- Landscape infographic (full width on top) -->
+            <div class="mb-8">
+                <div class="bg-gray-800 rounded-xl overflow-hidden cursor-pointer transform transition hover:opacity-90" onclick="openLightbox(0)">
+                    <img src="docs/GFP-High-Performance Golf Process Science.png" alt="Process Science" class="w-full h-auto max-h-80 mx-auto object-contain">
+                </div>
+            </div>
+
+            <!-- Two portrait infographics side by side -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-800 rounded-xl overflow-hidden cursor-pointer transform transition hover:opacity-90" onclick="openLightbox(1)">
+                    <img src="docs/GFP-Evolution of Golf Data Intelligence.png" alt="Evolution of Golf Data" class="w-full h-auto mx-auto md:h-96 object-contain p-4">
+                </div>
+                <div class="bg-gray-800 rounded-xl overflow-hidden cursor-pointer transform transition hover:opacity-90" onclick="openLightbox(2)">
+                    <img src="docs/GFP-Golf Shot Detection Pipeline Infographic.png" alt="Shot Detection Pipeline" class="w-full h-auto mx-auto md:h-96 object-contain p-4">
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screenshots Gallery -->
+    <section id="gallery" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">App <span class="gold-text">Gallery</span></h2>
+            <p class="text-gray-400 text-center mb-12">See the GFP Tracker in action</p>
+
+            <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-amber-400 scrollbar-track-gray-800">
+                <img src="images/screenshots/00.jpeg" alt="Dashboard" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(0)">
+                <img src="images/screenshots/01.jpeg" alt="Round Tracking" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(1)">
+                <img src="images/screenshots/2A46CED8-772B-4F0B-934D-834383CC6F40_1_105_c.jpeg" alt="Practice Session" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(2)">
+                <img src="images/screenshots/2C662A36-84C5-405B-83FA-1CA2BBCF7584_1_105_c.jpeg" alt="Analytics" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(3)">
+                <img src="images/screenshots/345631A0-FBF3-408F-ACCD-8D3211017C6F_1_105_c.jpeg" alt="Course List" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(4)">
+                <img src="images/screenshots/58BC67C5-3DA2-4F05-8F53-CE4745FC33B1_1_105_c.jpeg" alt="Round Details" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(5)">
+                <img src="images/screenshots/5EBA9F57-C724-443B-9491-DC11DB527487_1_105_c.jpeg" alt="Shot Tracking" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(6)">
+                <img src="images/screenshots/6F58F178-1D67-47E5-AD90-3CBAF0584608_1_105_c.jpeg" alt="Profile" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(7)">
+                <img src="images/screenshots/9A7993D3-263D-4C8A-B95A-1AE9E2A976B0_1_105_c.jpeg" alt="Coach Hub" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(8)">
+                <img src="images/screenshots/B2B71EDB-2366-4B02-BADE-2BBBFDB0DED0_1_105_c.jpeg" alt="Add Round" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(9)">
+                <img src="images/screenshots/B9184968-C44D-4D11-A3F8-8BE994D37C08_1_105_c.jpeg" alt="Summary" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(10)">
+                <img src="images/screenshots/C64086B3-C2C1-4459-8801-4761310149DB_1_105_c.jpeg" alt="Practice" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(11)">
+                <img src="images/screenshots/E41CD341-A7FD-4BB1-89DD-F8993B31C8A2_1_105_c.jpeg" alt="Add Course" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(12)">
+                <img src="images/screenshots/F220B3E5-5CAD-471A-875D-4474FD199DDB_1_105_c.jpeg" alt="Onboarding" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(13)">
+                <img src="images/screenshots/FAAE131B-4BF4-42C4-A823-11655F709E97_1_105_c.jpeg" alt="Login" class="h-64 md:h-80 flex-shrink-0 aspect-[3/4] object-cover rounded-xl cursor-pointer hover:ring-2 hover:ring-amber-400 transition" onclick="openGalleryLightbox(14)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Pitch: Why GFP is Different -->
+    <section id="player" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">You've Been Tracking <span class="gold-text">Golf Wrong</span></h2>
+            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">Every golf app tracks results. But where the ball finishes is mostly noise. GFP tracks what actually matters.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-gray-800 rounded-2xl p-8 border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold mb-4 text-red-400">What Other Apps Show You</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start gap-3"><i data-lucide="x" class="w-5 h-5 text-red-500 mt-0.5"></i> Score = 82 — "Good round!"</li>
+                        <li class="flex items-start gap-3"><i data-lucide="x" class="w-5 h-5 text-red-500 mt-0.5"></i> Fairways hit = 60%</li>
+                        <li class="flex items-start gap-3"><i data-lucide="x" class="w-5 h-5 text-red-500 mt-0.5"></i> Greens in regulation = 50%</li>
+                        <li class="flex items-start gap-3"><i data-lucide="x" class="w-5 h-5 text-red-500 mt-0.5"></i> Strokes gained approach = -0.3</li>
+                    </ul>
+                    <p class="mt-4 text-gray-500 text-sm">This data doesn't match what actually happened.</p>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-8 border-l-4 border-amber-400">
+                    <h3 class="text-xl font-bold mb-4 text-amber-400">What GFP Shows You</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400 mt-0.5"></i> 6 Heavy contacts on approaches</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400 mt-0.5"></i> 3 mental errors (fear, anger, no intention)</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400 mt-0.5"></i> Target-relative: missed LEFT on 4 shots</li>
+                        <li class="flex items-start gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400 mt-0.5"></i> Pressure score: +2 casual, +6 tournament</li>
+                    </ul>
+                    <p class="mt-4 text-gray-400 text-sm">This data tells you <span class="text-amber-400 font-semibold">what to practice.</span></p>
+                </div>
+            </div>
+
+            <!-- The Hook -->
+            <div class="bg-gradient-to-r from-amber-400/10 to-yellow-400/10 rounded-2xl p-8 md:p-12 text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold mb-4">"Hey GFP, fat 7-iron"</h3>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Just say what happened. No tapping. No stopping. Works on Apple Watch or iPhone. <span class="text-amber-400 font-semibold">No additional hardware required.</span></p>
+            </div>
+
+            <!-- Key Features -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-xl p-6 text-center">
+                    <i data-lucide="mic" class="w-10 h-10 text-amber-400 mx-auto mb-4"></i>
+                    <h4 class="font-bold mb-2">Voice-First</h4>
+                    <p class="text-gray-400 text-sm">"Hey GFP, thin wedge" — speak naturally, we handle the data</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-6 text-center">
+                    <i data-lucide="target" class="w-10 h-10 text-amber-400 mx-auto mb-4"></i>
+                    <h4 class="font-bold mb-2">Target-Relative</h4>
+                    <p class="text-gray-400 text-sm">Track vs YOUR target, not the pin. Smart misses count.</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-6 text-center">
+                    <i data-lucide="brain" class="w-10 h-10 text-amber-400 mx-auto mb-4"></i>
+                    <h4 class="font-bold mb-2">Mental Process</h4>
+                    <p class="text-gray-400 text-sm">Track fear, anger, misculation — the missing piece</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coach Pitch -->
+    <section id="coach" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-amber-400/20 text-amber-400 rounded-full text-sm font-semibold mb-4">FOR GOLF COACHES</span>
+                <h2 class="text-4xl font-bold mb-4">Data Worth <span class="gold-text">Teaching</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">You watch your students play. You see the patterns. But their golf app shows you fairways hit and strokes gained. That data doesn't match what you see.</p>
+            </div>
+
+            <!-- The Problem -->
+            <div class="bg-red-900/20 border border-red-800 rounded-2xl p-8 mb-12">
+                <h3 class="text-xl font-bold mb-4 text-red-400">The Coaching Problem</h3>
+                <p class="text-gray-300">A student with a 75 might have 8 process errors — or 22. Traditional apps can't tell the difference. They see the score, not the swing. You spend half the lesson translating between what the app says and what actually happened.</p>
+            </div>
+
+            <!-- The Solution -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">With GFP, You See:</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3"><i data-lucide="eye" class="w-6 h-6 text-amber-400 mt-0.5"></i><div><strong class="text-white">Their process</strong> — not just their score</div></li>
+                        <li class="flex items-start gap-3"><i data-lucide="zap" class="w-6 h-6 text-amber-400 mt-0.5"></i><div><strong class="text-white">Strike quality</strong> — fat, thin, toe, heel</div></li>
+                        <li class="flex items-start gap-3"><i data-lucide="brain" class="w-6 h-6 text-amber-400 mt-0.5"></i><div><strong class="text-white">Mental patterns</strong> — fear, anger, focus loss</div></li>
+                        <li class="flex items-start gap-3"><i data-lucide="trending-up" class="w-6 h-6 text-amber-400 mt-0.5"></i><div><strong class="text-white">Pressure patterns</strong> — casual vs tournament</div></li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 rounded-2xl p-8">
+                    <h4 class="text-lg font-bold mb-4 text-amber-400">The Conversation Starter</h4>
+                    <p class="text-gray-400 mb-4">Instead of:</p>
+                    <p class="text-gray-500 italic mb-4">"Your strokes gained on approach is -0.4"</p>
+                    <p class="text-gray-400 mb-4">You can say:</p>
+                    <p class="text-amber-400 font-semibold">"You've logged Heavy contact on 6 of your last 9 approach shots. That's a pattern. Let's work on bottom-of-arc."</p>
+                </div>
+            </div>
+
+            <!-- Coach Tiers -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-800 rounded-2xl p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Coach Standard</h3>
+                        <span class="text-2xl font-bold text-amber-400">$79/mo</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Up to 10 golfers</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Coach Hub (drills, focus areas)</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Real-time student dashboard access</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Custom golfer overrides</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Invitation management</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-amber-400/20 to-yellow-400/20 rounded-2xl p-8 border border-amber-400">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Coach AI</h3>
+                        <span class="text-2xl font-bold text-amber-400">$149/mo</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Everything in Standard</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> AI-generated lesson plans</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Automated pattern alerts</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-amber-400"></i> Voice for coach: "Hey GFP, show me Tommy's last 5 rounds"</li>
+                    </ul>
+                    <p class="mt-4 text-amber-400 text-sm font-semibold">MOST POPULAR — AI assists your coaching</p>
+                </div>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="bg-gray-800 rounded-2xl p-8 text-center">
+                <i data-lucide="quote" class="w-12 h-12 text-amber-400 mx-auto mb-4"></i>
+                <p class="text-xl text-gray-300 mb-6 italic">"I finally have data that matches what I see on the course. My students log shots in real-time, I see the patterns, and we have productive conversations about what to practice."</p>
+                <p class="text-gray-500">— Bay Area Golf Instructor</p>
+            </div>
+
+            <p class="text-center mt-8 text-gray-400">Built by a coach. For coaches. <span class="text-amber-400">Gavin Frase, TPI Level 2, 20+ years coaching experience.</span></p>
+        </div>
+    </section>
+
+    <!-- Appendix: Additional Info -->
+    <section id="appendix" class="py-24 px-6 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-gray-500">Appendix</h2>
+
+            <!-- Programs -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center">Coaching Programs</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                        <h4 class="text-xl font-bold mb-2">Player</h4>
+                        <p class="text-gray-400 text-sm mb-4">Process tracking, 30-Shot Combine, dashboard</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-6 border-2 border-amber-400">
+                        <h4 class="text-xl font-bold mb-2">Competitor</h4>
+                        <p class="text-gray-400 text-sm mb-4">Voice commands, GPS inference, advanced analytics</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                        <h4 class="text-xl font-bold mb-2">Elite</h4>
+                        <p class="text-gray-400 text-sm mb-4">AI patterns, periodization, GPT Coach</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadmap -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 text-center">Product Roadmap</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="bg-gray-800 px-6 py-4 rounded-xl"><span class="text-amber-400 font-bold">V1</span> — Foundation</div>
+                    <div class="bg-gray-800 px-6 py-4 rounded-xl"><span class="text-amber-400 font-bold">V2</span> — Voice + GPS</div>
+                    <div class="bg-gray-800 px-6 py-4 rounded-xl"><span class="text-amber-400 font-bold">V3</span> — AI Coaching</div>
+                </div>
+            </div>
+
+            <!-- Why GFP -->
+            <div>
+                <h3 class="text-2xl font-bold mb-8 text-center">Why GFP Tracker</h3>
+                <div class="space-y-4 text-gray-400 max-w-2xl mx-auto">
+                    <p><span class="text-amber-400 font-bold">1.</span> Strike Quality Over Ball Position — Track what you did with the club</p>
+                    <p><span class="text-amber-400 font-bold">2.</span> Target-Relative Direction — Measure against YOUR intended target</p>
+                    <p><span class="text-amber-400 font-bold">3.</span> Hardware-Free — Uses iPhone and Apple Watch you already own</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 border-t border-gray-800 bg-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <a href="https://gavinfrase.com"><img src="images/Gavin-Frase-Performance_nobg.png" alt="Gavin Frase Performance" class="h-24 md:h-32 mx-auto mb-6 hover:opacity-80 transition"></a>
+            <p class="text-gray-400 mb-2">TPI Level 2 Certified | 20+ Years Experience</p>
+            <p class="text-gray-500 mb-6">Sportsbox AI Certified | National Team Rowing Background</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="https://gavinfrase.com" class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300">
+                    Coaching <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="#pricing" class="text-gray-400 hover:text-amber-400">Get Started</a>
+            </div>
+            <p class="text-gray-600 text-sm">&copy; 2026 Gavin Frase Performance. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Beta Modal -->
+    <div id="beta-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeBetaModal()"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-amber-400 rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            <button onclick="closeBetaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <i data-lucide="rocket" class="w-16 h-16 text-amber-400 mx-auto mb-4"></i>
+            <h3 class="text-2xl font-bold mb-4">App Coming Soon</h3>
+            <p class="text-gray-400 mb-6">App Store app coming soon. Currently in TestFlight beta. Contact me if interested in beta access.</p>
+            <a href="mailto:gavinfrase@gmail.com?subject=GFP%20Tracker%20Beta&body=Hi%20Gavin%2C%20I%27m%20interested%20in%20trying%20the%20beta." class="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-black font-semibold rounded-full hover:bg-amber-300 transition">
+                <i data-lucide="mail" class="w-4 h-4"></i> Contact About Beta
+            </a>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="if(event.target === this) closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="prevImage()">&#10094;</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="lightbox-nav lightbox-next" onclick="nextImage()">&#10095;</span>
+    </div>
+
+    <script>
+        const images = [
+            'docs/GFP-High-Performance Golf Process Science.png',
+            'docs/GFP-Evolution of Golf Data Intelligence.png',
+            'docs/GFP-Golf Shot Detection Pipeline Infographic.png'
+        ];
+        const galleryImages = [
+            'images/screenshots/00.jpeg',
+            'images/screenshots/01.jpeg',
+            'images/screenshots/2A46CED8-772B-4F0B-934D-834383CC6F40_1_105_c.jpeg',
+            'images/screenshots/2C662A36-84C5-405B-83FA-1CA2BBCF7584_1_105_c.jpeg',
+            'images/screenshots/345631A0-FBF3-408F-ACCD-8D3211017C6F_1_105_c.jpeg',
+            'images/screenshots/58BC67C5-3DA2-4F05-8F53-CE4745FC33B1_1_105_c.jpeg',
+            'images/screenshots/5EBA9F57-C724-443B-9491-DC11DB527487_1_105_c.jpeg',
+            'images/screenshots/6F58F178-1D67-47E5-AD90-3CBAF0584608_1_105_c.jpeg',
+            'images/screenshots/9A7993D3-263D-4C8A-B95A-1CA9E2A976B0_1_105_c.jpeg',
+            'images/screenshots/B2B71EDB-2366-4B02-BADE-2BBBFDB0DED0_1_105_c.jpeg',
+            'images/screenshots/B9184968-C44D-4D11-A3F8-8BE994D37C08_1_105_c.jpeg',
+            'images/screenshots/C64086B3-C2C1-4459-8801-4761310149DB_1_105_c.jpeg',
+            'images/screenshots/E41CD341-A7FD-4BB1-89DD-F8993B31C8A2_1_105_c.jpeg',
+            'images/screenshots/F220B3E5-5CAD-471A-875D-4474FD199DDB_1_105_c.jpeg',
+            'images/screenshots/FAAE131B-4BF4-42C4-A823-11655F709E97_1_105_c.jpeg'
+        ];
+        let currentIndex = 0;
+        let currentGallery = images;
+
+        function openLightbox(index) {
+            currentGallery = images;
+            currentIndex = index;
+            document.getElementById('lightbox-img').src = images[index];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openGalleryLightbox(index) {
+            currentGallery = galleryImages;
+            currentIndex = index;
+            document.getElementById('lightbox-img').src = galleryImages[index];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function nextImage() { currentIndex = (currentIndex + 1) % currentGallery.length; document.getElementById('lightbox-img').src = currentGallery[currentIndex]; }
+        function prevImage() { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; document.getElementById('lightbox-img').src = currentGallery[currentIndex]; }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+    </script>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
